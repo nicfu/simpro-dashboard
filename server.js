@@ -21,6 +21,8 @@ if (!process.env.SIMPRO_API_KEY || !process.env.SIMPRO_API_URL) {
 // Configure axios instance for Simpro API
 const simproAPI = axios.create({
     baseURL: process.env.SIMPRO_API_URL,
+    proxy: false,
+    timeout: 30000,
     headers: {
         'Authorization': `Bearer ${process.env.SIMPRO_API_KEY}`,
         'Content-Type': 'application/json',
@@ -113,10 +115,18 @@ app.get('/api/quote-cost-centers', async (req, res) => {
         console.log('Fetching quote cost centers from Simpro API...');
         // Use legacy endpoint for backward compatibility
         const response = await simproAPI.get('costCenters/');
+        let data = response.data;
+        if (typeof data === 'string') {
+            try {
+                data = JSON.parse(data);
+            } catch (err) {
+                throw new Error('Invalid JSON response');
+            }
+        }
         res.json({
             success: true,
-            data: response.data,
-            count: response.data.length || 0
+            data,
+            count: Array.isArray(data) ? data.length : 0
         });
     } catch (error) {
         console.error('Error fetching quote cost centers:', error.response?.data || error.message);

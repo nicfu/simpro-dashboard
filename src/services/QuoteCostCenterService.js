@@ -7,16 +7,19 @@ const CostCenter = require('../models/CostCenter');
  */
 class QuoteCostCenterService {
   constructor(apiConfig = {}) {
-    this.baseURL = apiConfig.baseURL || process.env.SIMPRO_API_URL;
-    this.apiKey = apiConfig.apiKey || process.env.SIMPRO_API_KEY;
-    this.retryAttempts = apiConfig.retryAttempts || 3;
-    this.retryDelay = apiConfig.retryDelay || 1000;
-    this.timeout = apiConfig.timeout || 30000;
+    this.baseURL = apiConfig.baseURL ?? process.env.SIMPRO_API_URL;
+    this.apiKey = Object.prototype.hasOwnProperty.call(apiConfig, 'apiKey')
+      ? apiConfig.apiKey
+      : process.env.SIMPRO_API_KEY;
+    this.retryAttempts = apiConfig.retryAttempts ?? 3;
+    this.retryDelay = apiConfig.retryDelay ?? 1000;
+    this.timeout = apiConfig.timeout ?? 30000;
     
     // Create axios instance with default configuration
     this.apiClient = axios.create({
       baseURL: this.baseURL,
       timeout: this.timeout,
+      proxy: false,
       headers: {
         'Authorization': `Bearer ${this.apiKey}`,
         'Content-Type': 'application/json',
