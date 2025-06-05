@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simpro API Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Simpro API Dashboard</h1>
+            <div class="api-status" id="apiStatus">
+                <span class="status-indicator"></span>
+                <span class="status-text">Checking API connection...</span>
+            </div>
+        </header>
+
+        <main>
+            <!-- Quotes Section -->
+            <section class="data-section">
+                <div class="section-header">
+                    <h2>Quotes</h2>
+                    <button class="refresh-btn" onclick="fetchQuotes()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
+                        </svg>
+                        Refresh
+                    </button>
+                </div>
+                <div class="loading" id="quotesLoading">
+                    <div class="spinner"></div>
+                    <p>Loading quotes...</p>
+                </div>
+                <div class="error" id="quotesError" style="display: none;">
+                    <p class="error-message"></p>
+                </div>
+                <div class="data-container" id="quotesContainer" style="display: none;">
+                    <div class="data-summary">
+                        <span class="count">Total: <strong id="quotesCount">0</strong></span>
+                    </div>
+                    <div class="data-grid" id="quotesGrid"></div>
+                </div>
+            </section>
+
+            <!-- Quote Cost Centers Section -->
+            <section class="data-section">
+                <div class="section-header">
+                    <h2>Quote Cost Centers</h2>
+                    <button class="refresh-btn" onclick="fetchCostCenters()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
+                        </svg>
+                        Refresh
+                    </button>
+                </div>
+                <div class="loading" id="costCentersLoading">
+                    <div class="spinner"></div>
+                    <p>Loading cost centers...</p>
+                </div>
+                <div class="error" id="costCentersError" style="display: none;">
+                    <p class="error-message"></p>
+                </div>
+                <div class="data-container" id="costCentersContainer" style="display: none;">
+                    <div class="data-summary">
+                        <span class="count">Total: <strong id="costCentersCount">0</strong></span>
+                    </div>
+                    <div class="data-grid" id="costCentersGrid"></div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Connected to: <code id="apiUrl"></code></p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
