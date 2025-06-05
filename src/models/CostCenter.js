@@ -5,9 +5,9 @@ const Total = require('./Total');
  */
 class CostCenter {
   constructor(data = {}) {
-    this.id = this.validateId(data.ID || data.id);
-    this.quoteId = this.validateId(data.QuoteID || data.quoteId);
-    this.sectionId = this.validateId(data.SectionID || data.sectionId);
+    this.id = this.validateId(data.ID ?? data.id);
+    this.quoteId = this.validateId(data.QuoteID ?? data.quoteId);
+    this.sectionId = this.validateId(data.SectionID ?? data.sectionId);
     this.name = this.validateString(data.Name || data.name, 'name');
     this.description = data.Description || data.description || '';
     this.type = data.Type || data.type || '';

@@ -5,7 +5,7 @@ const Total = require('./Total');
  */
 class Section {
   constructor(data = {}) {
-    this.id = this.validateId(data.ID || data.id);
+    this.id = this.validateId(data.ID ?? data.id);
     this.name = this.validateString(data.Name || data.name, 'name');
     this.description = data.Description || data.description || '';
     this.order = data.Order || data.order || 0;

@@ -5,7 +5,7 @@ const Total = require('./Total');
  */
 class Quote {
   constructor(data = {}) {
-    this.id = this.validateId(data.ID || data.id);
+    this.id = this.validateId(data.ID ?? data.id);
     this.name = data.Name || data.name || '';
     this.description = data.Description || data.description || '';
     this.notes = data.Notes || data.notes || '';

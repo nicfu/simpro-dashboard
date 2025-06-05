@@ -5,6 +5,7 @@ require('dotenv').config({ path: '.env.test' });
 process.env.SIMPRO_API_KEY = 'test-api-key';
 process.env.SIMPRO_API_URL = 'https://api.test.simpro.com/api/v1.0/companies/0/';
 process.env.NODE_ENV = 'test';
+process.env.NO_PROXY = '*';
 
 // Global test timeout
 jest.setTimeout(30000);

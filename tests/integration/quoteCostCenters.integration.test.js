@@ -68,7 +68,7 @@ describe('Quote Cost Centers Integration Tests', () => {
     it('should handle network timeouts', async () => {
       apiScope
         .get('/costCenters/')
-        .socketDelay(31000) // Exceed timeout
+        .delayConnection(31000) // Exceed timeout
         .reply(200, mockQuoteCostCenterSummaries);
 
       const response = await request(app)
